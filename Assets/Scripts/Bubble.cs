@@ -15,6 +15,15 @@ public class Bubble : MonoBehaviour
         
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            Debug.Log("Bubble collided with spikes");
+            Explode();
+        }
+    }
+
     public void Explode()
     {
         Debug.Log("Bubble exploded");
