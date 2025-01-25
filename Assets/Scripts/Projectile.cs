@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("Projectile exploded");
         // Find all Rigidbody2D objects in the scene and apply movement to them
-        Rigidbody2D[] rbs = FindObjectsOfType<Rigidbody2D>();
+        Rigidbody2D[] rbs = FindObjectsByType<Rigidbody2D>(FindObjectsSortMode.None);
         foreach (Rigidbody2D rb in rbs)
         {
             ApplyMovement(rb);
