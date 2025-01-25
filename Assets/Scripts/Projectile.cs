@@ -23,6 +23,7 @@ public class Projectile : MonoBehaviour
     public ProjectileType type = ProjectileType.Explosive;
     public int maxCollisions = 3;
     public DistanceEffect distanceEffect = DistanceEffect.Quadratic;
+    public bool explodeOnCollision = false;
 
 
     Bubble bubble;
@@ -75,18 +76,18 @@ public class Projectile : MonoBehaviour
         // That's why we have a separate OnTriggerEnter2D method so we can detect the collision with the bubble
         // earlier than the OnCollisionEnter2D method and destroy the projectile before it collides with the bubble
         // ignoring the collision forces.
-        if (collision.gameObject.CompareTag("Bubble"))
+        if (explodeOnCollision && collision.gameObject.CompareTag("Bubble"))
         {
-            Debug.Log("Bomb collided with bubble");
+            Debug.Log("Projectile collided with bubble");
             Explode();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bubble"))
+        if (explodeOnCollision && collision.gameObject.CompareTag("Bubble"))
         {
-            Debug.Log("Bomb collided with bubble");
+            Debug.Log("Projectile collided with bubble");
             Explode();
         }
         if (collision.gameObject.CompareTag("Spikes"))

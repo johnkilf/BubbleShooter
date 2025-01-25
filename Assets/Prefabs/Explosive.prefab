@@ -166,9 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d00a8f0a7f237469060f7505f7e38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 2
-  maxForce: 3
+  forceMultiplier: 4
+  maxForce: 5
   maxEffectDistance: 2.5
+  maxLifetime: 3
   type: 0
   maxCollisions: 3
   distanceEffect: 1

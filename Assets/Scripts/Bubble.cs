@@ -12,7 +12,7 @@ public class Bubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,5 +28,7 @@ public class Bubble : MonoBehaviour
     {
         Debug.Log("Bubble exploded");
         Destroy(gameObject);
+        // Restart the game 
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
