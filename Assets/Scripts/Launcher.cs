@@ -4,9 +4,9 @@ public class Launcher : MonoBehaviour
 {
     [SerializeField] private GameObject forceIndicator;
     [SerializeField] private GameObject forceIndicatorVisual;
-    
+
     [SerializeField] private float rotationLimit = 70f;
-    
+
     public void Start()
     {
         GameInput.Instance.ActiveDelta += HandleActiveDelta;
@@ -16,7 +16,9 @@ public class Launcher : MonoBehaviour
     private void HandleReleasedDelta(Vector2 obj)
     {
         // TODO Launch ball
+        Debug.Log("Launch ball");
         forceIndicator.gameObject.SetActive(false);
+        GetComponent<BubbleGun>().LaunchBubble(obj);
     }
 
     private void HandleActiveDelta(Vector2 obj)

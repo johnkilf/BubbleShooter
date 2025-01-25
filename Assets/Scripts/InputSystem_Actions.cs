@@ -125,6 +125,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeType"",
+                    ""type"": ""Button"",
+                    ""id"": ""257f731d-ef67-43b8-8854-50c67a9c074c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -554,6 +563,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""847fc0a9-11bf-4d98-a9bc-ee52fee7003f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ChangeType"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1152,6 +1172,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Press = m_Player.FindAction("Press", throwIfNotFound: true);
         m_Player_Position = m_Player.FindAction("Position", throwIfNotFound: true);
+        m_Player_ChangeType = m_Player.FindAction("ChangeType", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1242,6 +1263,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Press;
     private readonly InputAction m_Player_Position;
+    private readonly InputAction m_Player_ChangeType;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1257,6 +1279,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Press => m_Wrapper.m_Player_Press;
         public InputAction @Position => m_Wrapper.m_Player_Position;
+        public InputAction @ChangeType => m_Wrapper.m_Player_ChangeType;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1299,6 +1322,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Position.started += instance.OnPosition;
             @Position.performed += instance.OnPosition;
             @Position.canceled += instance.OnPosition;
+            @ChangeType.started += instance.OnChangeType;
+            @ChangeType.performed += instance.OnChangeType;
+            @ChangeType.canceled += instance.OnChangeType;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1336,6 +1362,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Position.started -= instance.OnPosition;
             @Position.performed -= instance.OnPosition;
             @Position.canceled -= instance.OnPosition;
+            @ChangeType.started -= instance.OnChangeType;
+            @ChangeType.performed -= instance.OnChangeType;
+            @ChangeType.canceled -= instance.OnChangeType;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1529,6 +1558,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnPress(InputAction.CallbackContext context);
         void OnPosition(InputAction.CallbackContext context);
+        void OnChangeType(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
