@@ -52,5 +52,9 @@ public class Bubble : MonoBehaviour
     {
         if (winLoseScript != null)
             winLoseScript.Win();
+
+        Debug.Log("Bubble escaped!");
+        Destroy(gameObject);
+
     }
 }

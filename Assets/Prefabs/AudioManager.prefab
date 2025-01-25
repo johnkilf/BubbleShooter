@@ -117,7 +117,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: win
     clip: {fileID: 8300000, guid: 9e8466f7296584742aec59802e62facd, type: 3}
-    volume: 0.5
+    volume: 0.35
     pitch: 1
     loop: 0
     outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}

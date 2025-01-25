@@ -48,17 +48,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void PlayGame()
-    {
-        if (_levels.Count > 0)
-            SceneManager.LoadSceneAsync(_levels[0]);
-        else
-            Debug.Log("There aren't any levels to play! Add Scenes with the word 'Level' in them to get them automatically added.");
-    }
-
     public void PlayLevel(string levelName)
     {
         SceneManager.LoadSceneAsync(levelName);
+    }
+
+    public void PlayGame()
+    {
+        if (_levels.Count > 0)
+            PlayLevel(_levels[0]);
+        else
+            Debug.Log("There aren't any levels to play! Add Scenes with the word 'Level' in them to get them automatically added.");
     }
 
     public void PlayNextLevel()
@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
 
         // If we beat the last level go to Main Menu
         if (sceneIndex < _levels.Count)
-            SceneManager.LoadSceneAsync(_levels[sceneIndex]);
+            PlayLevel(_levels[sceneIndex]);
         else
             QuitToMainMenu();
 
@@ -84,14 +84,14 @@ public class LevelManager : MonoBehaviour
 
     public void ReloadLevel()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        PlayLevel(SceneManager.GetActiveScene().name);
     }
 
     public void QuitToMainMenu()
     {
         try
         {
-            SceneManager.LoadSceneAsync("MainMenu");
+            PlayLevel("MainMenu");
         }
         catch (Exception e)
         {
