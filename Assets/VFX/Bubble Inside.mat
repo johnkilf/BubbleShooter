@@ -51,18 +51,24 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _CenterColorFadeEnd: 0.87
-    - _CenterColorFadeStart: 0.73
+    - _CenterColorFadeStart: 0.247
+    - _ImpactDeformRadius: 1.26
+    - _ImpactMaster: 0.014152527
+    - _ImpactPushedAwayStrength: 1
+    - _ImpactScaleStrength1: 0.67
     - _MidColorFadeEnd: 1
     - _MidColorFadeStart: 0.919
+    - _RandomSeed: 0
     - _UseTexture: 1
-    - _WobbleScale: 0.59
-    - _WobbleSpeed: 0.41
-    - _WobbleStrength: 0.076
+    - _WobbleScale: 0.57
+    - _WobbleSpeed: 0.69
+    - _WobbleStrength: 0.102
     m_Colors:
-    - _CenterColor: {r: 0, g: 0.46832967, b: 1.509434, a: 0.2627451}
+    - _CenterColor: {r: 0.30526572, g: 0.99183166, b: 1.9611009, a: 0.14117648}
     - _Color0: {r: 0.39064258, g: 0.383277, b: 0.9339623, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MidColor: {r: 0.058823522, g: 0.34675908, b: 0.8039216, a: 0.5529412}
-    - _OuterColor: {r: 0.23529412, g: 1.3803922, b: 3.2156863, a: 0.70980394}
+    - _ImpactPosition: {r: 0.4253707, g: -0.645926, b: 0, a: 0}
+    - _MidColor: {r: 0.05980776, g: 0.2688052, b: 0.6037736, a: 0.5529412}
+    - _OuterColor: {r: 0.47140914, g: 1.500947, b: 6.4313707, a: 0.70980394}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
