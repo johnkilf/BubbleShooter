@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 205157003191950461}
   - component: {fileID: 5714306085476766369}
-  - component: {fileID: 3370746096279796070}
+  - component: {fileID: 8419744115610419655}
+  - component: {fileID: 2189110032564960750}
+  - component: {fileID: 6496941465279417452}
   m_Layer: 0
   m_Name: Bubble with Creature
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1227402509300847305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.32, y: 0.97, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.61077774, y: -1.821834, z: 0}
+  m_LocalScale: {x: 0.50746757, y: 0.50746757, z: 0.50746757}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8874732581121025481}
@@ -63,8 +65,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.067456864
     - serializedVersion: 3
-      time: 0.053787947
-      value: 1.4992777
+      time: 0.28522563
+      value: 1.2427698
       inSlope: 0.7865119
       outSlope: 0.7865119
       tangentMode: 0
@@ -84,13 +86,55 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   impactAnimationDuration: 0.5
---- !u!135 &3370746096279796070
-SphereCollider:
+--- !u!114 &8419744115610419655
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227402509300847305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d30469a3025b3a4e96fe126cd0256aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2189110032564960750
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227402509300847305}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3
+  m_LinearDamping: 1
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 300a4a401f189d44bb8c6f0dec68a62b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &6496941465279417452
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227402509300847305}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -99,12 +143,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.88
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.03149094, y: 0}
+  m_Radius: 1
 --- !u!1 &1547613158987208419
 GameObject:
   m_ObjectHideFlags: 0

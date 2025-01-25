@@ -35,35 +35,23 @@ public class BubbleVFX : MonoBehaviour
     Coroutine impactAnimationCoroutine;
     static readonly int ImpactMaster = Shader.PropertyToID("_ImpactMaster");
     static readonly int RandomSeed = Shader.PropertyToID("_RandomSeed");
+    static readonly int ImpactScaleStrength = Shader.PropertyToID("_ImpactScaleStrength");
 
     void Start()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
-        inputActions.Player.Press.Enable();
-        inputActions.Player.Press.performed += DebugImpactWithMouse;
 
         bubbleMaterial = Instantiate(bubbleRenderer.material);
         bubbleRenderer.material = bubbleMaterial;
-        
+
         creatureMaterial = Instantiate(creatureRenderer.material);
         creatureRenderer.material = creatureMaterial;
-        
+
         float randomSeed = UnityEngine.Random.value;
         bubbleMaterial.SetFloat(RandomSeed, randomSeed);
         creatureMaterial.SetFloat(RandomSeed, randomSeed);
         //inputActions.Player.Position.performed += StoreMousePosition;
     }
 
-
-    void DebugImpactWithMouse(InputAction.CallbackContext obj)
-    {
-        Vector2 mousePosition = inputActions.Player.Position.ReadValue<Vector2>();
-
-        //obj.ReadValue<Vector2>();
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        StartImpactAnimation(worldPosition);
-    }
 
 
     public void StartImpactAnimation(Vector2 impactPositionWorld)
@@ -77,11 +65,12 @@ public class BubbleVFX : MonoBehaviour
     }
 
 
-    IEnumerator ImpactAnimation(Vector2 impactPosition)
+    IEnumerator ImpactAnimation(Vector2 impactPosition, float impactStrength = 1)
     {
         impactAnimationIsRunning = true;
 
         bubbleMaterial.SetVector(ImpactPosition, impactPosition);
+        bubbleMaterial.SetFloat(ImpactScaleStrength, impactStrength);
         creatureMaterial.SetVector(ImpactPosition, impactPosition);
 
         float time = 0;
@@ -95,7 +84,7 @@ public class BubbleVFX : MonoBehaviour
 
             bubbleMaterial.SetFloat(ImpactMaster, curveAdjustedT);
             creatureMaterial.SetFloat(ImpactMaster, curveAdjustedT);
-            
+
             yield return null;
         }
     }

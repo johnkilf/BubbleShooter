@@ -22,6 +22,12 @@ public class Bubble : MonoBehaviour
             Debug.Log("Bubble collided with spikes");
             Explode();
         }
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            float impactStrength = collision.relativeVelocity.magnitude;
+            Vector2 impactPoint = collision.GetContact(0).point;
+            GetComponent<BubbleVFX>().StartImpactAnimation(impactPoint);
+        }
     }
 
     public void Explode()
