@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class GameInput : Singleton<GameInput>
 {
     [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
+    [SerializeField] private RectTransform disallowedArea; 
 
     private InputSystem_Actions _inputSystemActions;
 
@@ -47,13 +48,23 @@ public class GameInput : Singleton<GameInput>
 
     private void HandlePressStarted(InputAction.CallbackContext obj)
     {
-        Debug.Log("Press started");
+        if (IsWithinDisallowedArea(_currentPos))
+        {
+            Debug.Log("Disallowed click");
+            return;
+        }
+        
         _start = _currentPos;
         _isPressed = true;
     }
 
     private void HandlePressCanceled(InputAction.CallbackContext obj)
     {
+        if (!_isPressed)
+        {
+            return;
+        }
+        
         Debug.Log("Press cancelled");
         Vector2 dragVector = _start - _currentPos;
         var portionOfFullDrag = ScaleDragVector(dragVector);
@@ -67,4 +78,17 @@ public class GameInput : Singleton<GameInput>
         ChangeProjectileType?.Invoke();
 
     }
+    
+    private bool IsWithinDisallowedArea(Vector2 screenPosition)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            disallowedArea,
+            screenPosition,
+            null, // You can specify a camera if required
+            out Vector2 localPoint
+        );
+
+        return disallowedArea.rect.Contains(localPoint);
+    }
+
 }

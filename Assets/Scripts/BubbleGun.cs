@@ -15,9 +15,6 @@ public class BubbleGun : MonoBehaviour
 
     List<ProjectileType> availableTypes = new List<ProjectileType> { ProjectileType.Explosive, ProjectileType.Implosive, ProjectileType.BasicProjectile };
 
-    private float chargeStartTime = 0f;
-    private bool isCharging = false;
-
     // min force per projectile type
     public float minForceExplosive = 10f;
     public float minForceImplosive = 10f;
@@ -28,13 +25,12 @@ public class BubbleGun : MonoBehaviour
     public float maxForceImplosive = 40f;
     public float maxForceBasicProjectile = 40f;
 
-    public float maxChargeTime = 2f;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetGunType(currentType);
         GameInput.Instance.ChangeProjectileType += ChangeGunType;
+        HudEvents.ProjectileClicked += SetGunType;
     }
 
     // Update is called once per frame
