@@ -46,10 +46,6 @@ public class Projectile : MonoBehaviour
             Debug.Log("Projectile reached max lifetime");
             Explode();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Explode();
-        }
     }
 
     void OnDrawGizmos()

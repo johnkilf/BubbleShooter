@@ -9,6 +9,8 @@ public class BubbleGun : MonoBehaviour
     public GameObject implosivePrefab;
     public GameObject basicProjectilePrefab;
 
+    public SpriteRenderer spriteRenderer;
+
     ProjectileType currentType = ProjectileType.Explosive;
 
     List<ProjectileType> availableTypes = new List<ProjectileType> { ProjectileType.Explosive, ProjectileType.Implosive, ProjectileType.BasicProjectile };
@@ -32,85 +34,73 @@ public class BubbleGun : MonoBehaviour
     void Start()
     {
         SetGunType(currentType);
+        GameInput.Instance.ChangeProjectileType += ChangeGunType;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Start charging when mouse button is pressed
-        if (Input.GetMouseButtonDown(0))
+    }
+
+    public void LaunchBubble(Vector2 velocity)
+    {
+        float minForce = 0;
+        float maxForce = 0;
+        float magnitude = velocity.magnitude;
+        if (currentType == ProjectileType.Explosive)
         {
-            isCharging = true;
-            chargeStartTime = Time.time;
+            minForce = minForceExplosive;
+            maxForce = maxForceExplosive;
+        }
+        else if (currentType == ProjectileType.Implosive)
+        {
+            minForce = minForceImplosive;
+            maxForce = maxForceImplosive;
+        }
+        else if (currentType == ProjectileType.BasicProjectile)
+        {
+            minForce = minForceBasicProjectile;
+            maxForce = maxForceBasicProjectile;
+        }
+        Debug.Log("Magnitude: " + magnitude);
+        float force = Mathf.Lerp(minForce, maxForce, magnitude);
+
+        // Instantiate projectile
+        GameObject projectile;
+        if (currentType == ProjectileType.Explosive)
+        {
+            projectile = Instantiate(explosivePrefab, transform.position, Quaternion.identity);
+        }
+        else if (currentType == ProjectileType.BasicProjectile)
+        {
+            projectile = Instantiate(basicProjectilePrefab, transform.position, Quaternion.identity);
+        }
+        else if (currentType == ProjectileType.Implosive)
+        {
+            projectile = Instantiate(implosivePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Unknown projectile type");
+            return;
         }
 
-        // Release projectile when mouse button is released
-        if (Input.GetMouseButtonUp(0) && isCharging)
-        {
-            isCharging = false;
-            float chargeTime = Mathf.Min(Time.time - chargeStartTime, maxChargeTime);
-            float chargePercent = chargeTime / maxChargeTime;
-            float minForce = 0;
-            float maxForce = 0;
-            if (currentType == ProjectileType.Explosive)
-            {
-                minForce = minForceExplosive;
-                maxForce = maxForceExplosive;
-            }
-            else if (currentType == ProjectileType.Implosive)
-            {
-                minForce = minForceImplosive;
-                maxForce = maxForceImplosive;
-            }
-            else if (currentType == ProjectileType.BasicProjectile)
-            {
-                minForce = minForceBasicProjectile;
-                maxForce = maxForceBasicProjectile;
-            }
-            float force = Mathf.Lerp(minForce, maxForce, chargePercent);
+        // Get direction and apply force
+        Vector2 direction = velocity;
+        direction.Normalize();
 
-            // Instantiate projectile
-            GameObject projectile;
-            if (currentType == ProjectileType.Explosive)
-            {
-                projectile = Instantiate(explosivePrefab, transform.position, Quaternion.identity);
-            }
-            else if (currentType == ProjectileType.BasicProjectile)
-            {
-                projectile = Instantiate(basicProjectilePrefab, transform.position, Quaternion.identity);
-            }
-            else if (currentType == ProjectileType.Implosive)
-            {
-                projectile = Instantiate(implosivePrefab, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Debug.LogError("Unknown projectile type");
-                return;
-            }
+        Debug.Log("Force: " + force);
+        Debug.Log("Direction: " + direction);
 
-            // Get direction and apply force
-            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            direction.Normalize();
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+    }
 
-            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-            rb.AddForce(direction * force, ForceMode2D.Impulse);
-        }
-
-        // Change projectile type with mouse wheel
-        if (Input.mouseScrollDelta.y > 0)
-        {
-            int currentIndex = availableTypes.IndexOf(currentType);
-            currentIndex = (currentIndex + 1) % availableTypes.Count;
-            SetGunType(availableTypes[currentIndex]);
-        }
-        else if (Input.mouseScrollDelta.y < 0)
-        {
-            int currentIndex = availableTypes.IndexOf(currentType);
-            currentIndex = (currentIndex - 1 + availableTypes.Count) % availableTypes.Count;
-            SetGunType(availableTypes[currentIndex]);
-        }
-
+    private void ChangeGunType()
+    {
+        int currentIndex = availableTypes.IndexOf(currentType);
+        currentIndex = (currentIndex + 1) % availableTypes.Count;
+        SetGunType(availableTypes[currentIndex]);
     }
 
     private void SetGunType(ProjectileType type)
@@ -120,17 +110,20 @@ public class BubbleGun : MonoBehaviour
         if (currentType == ProjectileType.Explosive)
         {
             // Set sprite to explosive 
-            GetComponent<SpriteRenderer>().color = Color.red;
+            // GetComponent<SpriteRenderer>().color = Color.red;
+            spriteRenderer.color = Color.red;
         }
         else if (currentType == ProjectileType.BasicProjectile)
         {
             // Set sprite to basic
-            GetComponent<SpriteRenderer>().color = Color.green;
+            // GetComponent<SpriteRenderer>().color = Color.green;
+            spriteRenderer.color = Color.green;
         }
         else if (currentType == ProjectileType.Implosive)
         {
             // Set sprite to implosive
-            GetComponent<SpriteRenderer>().color = Color.blue;
+            // GetComponent<SpriteRenderer>().color = Color.blue;
+            spriteRenderer.color = Color.blue;
         }
         else
         {
