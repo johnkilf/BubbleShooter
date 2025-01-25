@@ -20,6 +20,11 @@ public class WinLoseScript : MonoBehaviour
 
         if (loseMenu != null)
             loseMenu.gameObject.SetActive(false);
+
+        // Stop music
+        AudioManager.audioManagerRef.StopSound("main_theme");
+        // PLAY SOUND: win
+        AudioManager.audioManagerRef.PlaySound("win");
     }
 
     public void Lose()
@@ -35,5 +40,11 @@ public class WinLoseScript : MonoBehaviour
 
         if (winMenu != null)
             winMenu.gameObject.SetActive(false);
+
+        // Stop music
+        AudioManager.audioManagerRef.StopSound("main_theme");
+        // PLAY SOUND: lose
+        AudioManager.audioManagerRef.PlaySound("lose");
     }
+
 }
