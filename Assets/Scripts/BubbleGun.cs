@@ -15,9 +15,18 @@ public class BubbleGun : MonoBehaviour
 
     private float chargeStartTime = 0f;
     private bool isCharging = false;
-    public float minForce = 10f;
-    public float maxForce = 40f;
-    public float maxChargeTime = 2f; // Maximum charge time in seconds
+
+    // min force per projectile type
+    public float minForceExplosive = 10f;
+    public float minForceImplosive = 10f;
+    public float minForceBasicProjectile = 10f;
+
+    // max force per projectile type
+    public float maxForceExplosive = 40f;
+    public float maxForceImplosive = 40f;
+    public float maxForceBasicProjectile = 40f;
+
+    public float maxChargeTime = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,6 +50,23 @@ public class BubbleGun : MonoBehaviour
             isCharging = false;
             float chargeTime = Mathf.Min(Time.time - chargeStartTime, maxChargeTime);
             float chargePercent = chargeTime / maxChargeTime;
+            float minForce = 0;
+            float maxForce = 0;
+            if (currentType == ProjectileType.Explosive)
+            {
+                minForce = minForceExplosive;
+                maxForce = maxForceExplosive;
+            }
+            else if (currentType == ProjectileType.Implosive)
+            {
+                minForce = minForceImplosive;
+                maxForce = maxForceImplosive;
+            }
+            else if (currentType == ProjectileType.BasicProjectile)
+            {
+                minForce = minForceBasicProjectile;
+                maxForce = maxForceBasicProjectile;
+            }
             float force = Mathf.Lerp(minForce, maxForce, chargePercent);
 
             // Instantiate projectile
