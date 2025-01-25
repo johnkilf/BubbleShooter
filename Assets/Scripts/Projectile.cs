@@ -96,11 +96,6 @@ public class Projectile : MonoBehaviour
             Debug.Log("Bubble collided with spikes");
             Explode();
         }
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            Debug.Log("Projectile collided with projectile");
-            Explode();
-        }
         collisionCount++;
         if (collisionCount >= maxCollisions)
         {
