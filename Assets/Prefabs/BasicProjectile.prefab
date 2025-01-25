@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 9113640945991482476, guid: 3487fdcb4753944398a9f25ff8b555b4, type: 3}
   m_Color: {r: 0, g: 1, b: 0.023465157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,6 +168,8 @@ MonoBehaviour:
   forceMultiplier: 2
   maxForce: 3
   maxEffectDistance: 10
+  maxLifetime: 3
   type: 2
   maxCollisions: 3
   distanceEffect: 1
+  explodeOnCollision: 0

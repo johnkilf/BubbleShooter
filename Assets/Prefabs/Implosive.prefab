@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -8465947332029317636, guid: 4ef918d91253b420795ad5a990046f43, type: 3}
   m_Color: {r: 0, g: 0.15050888, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   type: 1
   maxCollisions: 3
   distanceEffect: 1
+  explodeOnCollision: 0
 --- !u!58 &3856219625963938123
 CircleCollider2D:
   m_ObjectHideFlags: 0
