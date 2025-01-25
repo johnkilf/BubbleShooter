@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameInput : Singleton<GameInput>
+public class GameInput : MonoBehaviour
 {
     [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
     [SerializeField] private RectTransform disallowedArea; 
@@ -13,12 +13,11 @@ public class GameInput : Singleton<GameInput>
     private Vector2 _start;
     private Vector2 _currentPos;
 
-    public Action<Vector2> ActiveDelta;
-    public Action<Vector2> ReleasedDelta;
-    public Action ChangeProjectileType;
-    protected override void Awake()
+    public static Action<Vector2> ActiveDelta;
+    public static Action<Vector2> ReleasedDelta;
+    public static Action ChangeProjectileType;
+    protected void Awake()
     {
-        base.Awake();
         _inputSystemActions = new InputSystem_Actions();
         _inputSystemActions.Player.Enable();
         _inputSystemActions.Player.Press.Enable();
@@ -27,6 +26,13 @@ public class GameInput : Singleton<GameInput>
         _inputSystemActions.Player.Press.canceled += HandlePressCanceled;
         _inputSystemActions.Player.Position.performed += HandlePos;
         _inputSystemActions.Player.ChangeType.performed += HandleProjectileTypeChange;
+    }
+
+    private void OnDisable()
+    {
+        _inputSystemActions.Player.Disable();
+        _inputSystemActions.Player.Press.Disable();
+        _inputSystemActions.Dispose();
     }
 
     private float ScaleDragVector(Vector2 delta)
