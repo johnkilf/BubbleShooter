@@ -25,6 +25,10 @@ public class BubbleGun : MonoBehaviour
     public float maxForceImplosive = 40f;
     public float maxForceBasicProjectile = 40f;
 
+    public Color explosiveColor = Color.red;
+    public Color implosiveColor = Color.blue;
+    public Color basicProjectileColor = Color.green;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -106,17 +110,17 @@ public class BubbleGun : MonoBehaviour
         if (currentType == ProjectileType.Explosive)
         {
             // Set sprite to explosive 
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = explosiveColor;
         }
         else if (currentType == ProjectileType.BasicProjectile)
         {
             // Set sprite to basic
-            spriteRenderer.color = Color.green;
+            spriteRenderer.color = basicProjectileColor;
         }
         else if (currentType == ProjectileType.Implosive)
         {
             // Set sprite to implosive
-            spriteRenderer.color = Color.blue;
+            spriteRenderer.color = implosiveColor;
         }
         else
         {
