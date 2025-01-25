@@ -24,6 +24,7 @@ public class Bubble : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             Debug.Log("Bubble reached the finish line");
+            Escape();
         }
         if (collision.gameObject.CompareTag("Spikes"))
         {
@@ -47,7 +48,7 @@ public class Bubble : MonoBehaviour
             winLoseScript.Lose();
     }
 
-    public void Escaped()
+    public void Escape()
     {
         if (winLoseScript != null)
             winLoseScript.Win();

@@ -13,7 +13,7 @@ public class WinLoseScript : MonoBehaviour
             winMenu.gameObject.SetActive(true);
 
         if (pauseMenu != null)
-            winMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(false);
 
         if (pauseButton != null)
             pauseButton.gameObject.SetActive(false);
@@ -33,7 +33,7 @@ public class WinLoseScript : MonoBehaviour
             loseMenu.gameObject.SetActive(true);
 
         if (pauseMenu != null)
-            winMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(false);
 
         if (pauseButton != null)
             pauseButton.gameObject.SetActive(false);
