@@ -4,37 +4,82 @@ public enum ProjectileType
 {
     Explosive,
     Implosive,
+    BasicProjectile
 }
 
-public class Projectile  : MonoBehaviour
+public enum DistanceEffect
 {
-    public float force_multiplier = 20;
+    Linear,
+    Quadratic,
+    Exponential
+}
+
+public class Projectile : MonoBehaviour
+{
+    public float forceMultiplier = 20;
+    public float maxForce = 10;
+    public float maxEffectDistance = 0.5f;
+    public float maxLifetime = 3;
     public ProjectileType type = ProjectileType.Explosive;
+    public int maxCollisions = 3;
+    public DistanceEffect distanceEffect = DistanceEffect.Quadratic;
+
 
     Bubble bubble;
+    int collisionCount = 0;
+    float creationTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bubble = GameObject.Find("Bubble").GetComponent<Bubble>();
+        creationTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Destroy the projectile if it has been alive for too long
+        if (Time.time - creationTime > maxLifetime)
+        {
+            Debug.Log("Projectile reached max lifetime");
+            Explode();
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Explode();
         }
     }
 
+    void OnDrawGizmos()
+    {
+        // Draw an effect radius around the bomb
+        Gizmos.color = Color.red;
+        if (type == ProjectileType.Implosive || type == ProjectileType.Explosive)
+        {
+            Gizmos.DrawWireSphere(transform.position, maxEffectDistance);
+        }
+    }
+
     public void Explode()
     {
-        Debug.Log("Bomb exploded");
-        // bubble.ApplyMovement(this);
+        Debug.Log("Projectile exploded");
         Rigidbody2D bubble_rb = bubble.GetComponent<Rigidbody2D>();
         ApplyMovement(bubble_rb);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // We only want to apply force from the explosion, not from the collision with the bubble
+        // That's why we have a separate OnTriggerEnter2D method so we can detect the collision with the bubble
+        // earlier than the OnCollisionEnter2D method and destroy the projectile before it collides with the bubble
+        // ignoring the collision forces.
+        if (collision.gameObject.CompareTag("Bubble"))
+        {
+            Debug.Log("Bomb collided with bubble");
+            Explode();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,6 +87,22 @@ public class Projectile  : MonoBehaviour
         if (collision.gameObject.CompareTag("Bubble"))
         {
             Debug.Log("Bomb collided with bubble");
+            Explode();
+        }
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            Debug.Log("Bubble collided with spikes");
+            Explode();
+        }
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Debug.Log("Projectile collided with projectile");
+            Explode();
+        }
+        collisionCount++;
+        if (collisionCount >= maxCollisions)
+        {
+            Debug.Log("Projectile reached max collisions");
             Explode();
         }
     }
@@ -58,12 +119,45 @@ public class Projectile  : MonoBehaviour
         {
             direction = rb.transform.position - transform.position;
         }
-        else {
+        else if (type == ProjectileType.BasicProjectile)
+        {
+            return;
+        }
+        else
+        {
             throw new System.Exception("Invalid projectile type");
         }
 
         float distance = direction.magnitude;
+        if (distance > maxEffectDistance)
+        {
+            Debug.Log("Bubble is out of range");
+            return;
+        }
+
         direction.Normalize();
-        rb.AddForce(direction * force_multiplier / distance, ForceMode2D.Impulse);
+        float force;
+        if (distanceEffect == DistanceEffect.Linear)
+        {
+            force = forceMultiplier / distance;
+        }
+        else if (distanceEffect == DistanceEffect.Quadratic)
+        {
+            force = forceMultiplier / (distance * distance);
+        }
+        else if (distanceEffect == DistanceEffect.Exponential)
+        {
+            force = forceMultiplier / Mathf.Pow(distance, 2);
+        }
+        else
+        {
+            throw new System.Exception("Invalid distance effect");
+        }
+
+        // Cap force
+        force = Mathf.Min(force, maxForce);
+
+        Debug.Log("Force: " + force);
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
     }
 }
