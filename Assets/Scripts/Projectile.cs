@@ -61,8 +61,13 @@ public class Projectile : MonoBehaviour
     public void Explode()
     {
         Debug.Log("Projectile exploded");
-        Rigidbody2D bubble_rb = bubble.GetComponent<Rigidbody2D>();
-        ApplyMovement(bubble_rb);
+        // Find all Rigidbody2D objects in the scene and apply movement to them
+        Rigidbody2D[] rbs = FindObjectsOfType<Rigidbody2D>();
+        foreach (Rigidbody2D rb in rbs)
+        {
+            ApplyMovement(rb);
+        }
+
         Destroy(gameObject);
     }
 

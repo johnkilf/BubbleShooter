@@ -110,19 +110,16 @@ public class BubbleGun : MonoBehaviour
         if (currentType == ProjectileType.Explosive)
         {
             // Set sprite to explosive 
-            // GetComponent<SpriteRenderer>().color = Color.red;
             spriteRenderer.color = Color.red;
         }
         else if (currentType == ProjectileType.BasicProjectile)
         {
             // Set sprite to basic
-            // GetComponent<SpriteRenderer>().color = Color.green;
             spriteRenderer.color = Color.green;
         }
         else if (currentType == ProjectileType.Implosive)
         {
             // Set sprite to implosive
-            // GetComponent<SpriteRenderer>().color = Color.blue;
             spriteRenderer.color = Color.blue;
         }
         else
