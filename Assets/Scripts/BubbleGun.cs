@@ -3,7 +3,11 @@ using UnityEngine;
 public class BubbleGun : MonoBehaviour
 {
 
-    public GameObject bombPrefab;
+    public GameObject explosivePrefab;
+    public GameObject implosivePrefab;
+
+    ProjectileType currentType = ProjectileType.Explosive;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,18 +21,39 @@ public class BubbleGun : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Mouse button was pressed");
-            Debug.Log("Instantiating bomb");
-            // Instantiate bomb
-            GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Instantiating projectile");
+
+            // Instantiate projectile
+            GameObject projectile;
+            if (currentType == ProjectileType.Explosive)
+            {
+                projectile = Instantiate(explosivePrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                projectile = Instantiate(implosivePrefab, transform.position, Quaternion.identity);
+            }
 
             // Get direction (from gun to mouse position)
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             direction.Normalize();
             
             // Apply force
-            Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             rb.AddForce(direction * 20, ForceMode2D.Impulse);
         }
         
+        // Change projectile type with arrow keys
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Debug.Log("Switching to explosive projectile");
+            currentType = ProjectileType.Explosive;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Debug.Log("Switching to implosive projectile");
+            currentType = ProjectileType.Implosive;
+        }
+
     }
 }

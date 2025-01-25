@@ -1,8 +1,16 @@
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public enum ProjectileType
+{
+    Explosive,
+    Implosive,
+}
+
+public class Projectile  : MonoBehaviour
 {
     public float force_multiplier = 20;
+    public ProjectileType type = ProjectileType.Explosive;
+
     Bubble bubble;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,7 +49,19 @@ public class Bomb : MonoBehaviour
     public void ApplyMovement(Rigidbody2D rb)
     {
         Debug.Log("Applying movement to bubble");
-        Vector2 direction = rb.transform.position - transform.position;
+        Vector2 direction;
+        if (type == ProjectileType.Implosive)
+        {
+            direction = transform.position - rb.transform.position;
+        }
+        else if (type == ProjectileType.Explosive)
+        {
+            direction = rb.transform.position - transform.position;
+        }
+        else {
+            throw new System.Exception("Invalid projectile type");
+        }
+
         float distance = direction.magnitude;
         direction.Normalize();
         rb.AddForce(direction * force_multiplier / distance, ForceMode2D.Impulse);
