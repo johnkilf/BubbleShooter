@@ -29,7 +29,7 @@ public class BubbleGun : MonoBehaviour
     void Start()
     {
         SetGunType(currentType);
-        GameInput.Instance.ChangeProjectileType += ChangeGunType;
+        GameInput.ChangeProjectileType += ChangeGunType;
         HudEvents.ProjectileClicked += SetGunType;
     }
 

@@ -10,14 +10,14 @@ public class Launcher : MonoBehaviour
 
     public void Start()
     {
-        GameInput.Instance.ActiveDelta += HandleActiveDelta;
-        GameInput.Instance.ReleasedDelta += HandleReleasedDelta;
+        GameInput.ActiveDelta += HandleActiveDelta;
+        GameInput.ReleasedDelta += HandleReleasedDelta;
     }
 
     private void OnDisable()
     {
-        GameInput.Instance.ActiveDelta -= HandleActiveDelta;
-        GameInput.Instance.ReleasedDelta -= HandleReleasedDelta;
+        GameInput.ActiveDelta -= HandleActiveDelta;
+        GameInput.ReleasedDelta -= HandleReleasedDelta;
     }
 
     private void HandleReleasedDelta(Vector2 obj)

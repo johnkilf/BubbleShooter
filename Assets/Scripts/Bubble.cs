@@ -17,6 +17,10 @@ public class Bubble : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Bubble reached the finish line");
+        }
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Debug.Log("Bubble collided with spikes");
