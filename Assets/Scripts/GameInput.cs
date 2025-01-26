@@ -13,7 +13,6 @@ public class GameInput : MonoBehaviour
 
     private bool _isPressed;
     private Vector2 _start;
-    private Vector2 _currentPos;
 
     public static Action<Vector2> ActiveDelta;
     public static Action<Vector2> ReleasedDelta;
@@ -44,11 +43,11 @@ public class GameInput : MonoBehaviour
 
     private void HandlePos(InputAction.CallbackContext obj)
     {
-        _currentPos = obj.ReadValue<Vector2>();
+        var position = obj.ReadValue<Vector2>();
 
         if (_isPressed)
         {
-            var delta = Camera.main.ScreenToWorldPoint(_currentPos) - Camera.main.ScreenToWorldPoint(_start);
+            var delta = Camera.main.ScreenToWorldPoint(position) - Camera.main.ScreenToWorldPoint(_start);
             Debug.Log("Original delta: " + delta);
             ActiveDelta?.Invoke(delta);
         }
@@ -56,13 +55,15 @@ public class GameInput : MonoBehaviour
 
     private void HandlePressStarted(InputAction.CallbackContext obj)
     {
-        if (IsWithinDisallowedArea(_currentPos))
+        var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
+
+        if (IsWithinDisallowedArea(position))
         {
             Debug.Log("Disallowed click");
             return;
         }
 
-        _start = _currentPos;
+        _start = position;
         _isPressed = true;
     }
 
@@ -73,8 +74,9 @@ public class GameInput : MonoBehaviour
             return;
         }
 
+        var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
         Debug.Log("Press cancelled");
-        Vector2 dragVector = Camera.main.ScreenToWorldPoint(_start) - Camera.main.ScreenToWorldPoint(_currentPos);
+        Vector2 dragVector = Camera.main.ScreenToWorldPoint(_start) - Camera.main.ScreenToWorldPoint(position);
         ReleasedDelta?.Invoke(dragVector);
         _isPressed = false;
     }
@@ -91,7 +93,7 @@ public class GameInput : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             disallowedArea,
             screenPosition,
-            null, // You can specify a camera if required
+            null,
             out Vector2 localPoint
         );
 
