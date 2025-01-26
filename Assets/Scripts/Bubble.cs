@@ -22,6 +22,15 @@ public class Bubble : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Bubble reached the finish line");
+            Escape();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Finish"))
@@ -46,7 +55,7 @@ public class Bubble : MonoBehaviour
     public void Explode()
     {
         OnBubbleExploded?.Invoke(transform.position);
-        
+
         Debug.Log("Bubble exploded");
         Destroy(gameObject);
 
@@ -60,7 +69,7 @@ public class Bubble : MonoBehaviour
             winLoseScript.Win();
 
         Debug.Log("Bubble escaped!");
-        Destroy(gameObject);
+        // Destroy(gameObject);
 
     }
 }

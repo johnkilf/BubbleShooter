@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManagers
       objectReference: {fileID: 0}
+    - target: {fileID: 3482189964568182465, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3702653392758722207, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
       propertyPath: isActive
       value: 0
@@ -1296,11 +1300,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 205157003191950461, guid: bb84355eff754b24d93e3871b5271050, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 205157003191950461, guid: bb84355eff754b24d93e3871b5271050, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: 3.49
       objectReference: {fileID: 0}
     - target: {fileID: 205157003191950461, guid: bb84355eff754b24d93e3871b5271050, type: 3}
       propertyPath: m_LocalPosition.z
