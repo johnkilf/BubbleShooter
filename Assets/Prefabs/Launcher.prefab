@@ -290,6 +290,9 @@ MonoBehaviour:
   forceIndicatorBody: {fileID: 1963930259915560315}
   forceIndicatorHead: {fileID: 491637610072793428}
   rotationLimit: 70
+  offset: 0.075
+  distanceToDragForMaximumSpeed: 0.15
+  minForce: 0.01
 --- !u!114 &3232871787902690225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,10 +311,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7682993628935079348}
   minForceExplosive: 1
   minForceImplosive: 1
-  minForceBasicProjectile: 2
+  minForceBasicProjectile: 1
   maxForceExplosive: 10
   maxForceImplosive: 10
-  maxForceBasicProjectile: 20
+  maxForceBasicProjectile: 10
   explosiveColor: {r: 1, g: 0, b: 0, a: 1}
   implosiveColor: {r: 0, g: 0, b: 1, a: 1}
   basicProjectileColor: {r: 0, g: 1, b: 0, a: 1}
