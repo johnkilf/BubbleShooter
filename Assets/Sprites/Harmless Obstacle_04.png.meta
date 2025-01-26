@@ -116,13 +116,13 @@ TextureImporter:
       name: Harmless Obstacle_04_0
       rect:
         serializedVersion: 2
-        x: 21
+        x: 0
         y: 0
-        width: 291
+        width: 312
         height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 20, z: 19, w: 10}
+      border: {x: 22, y: 20, z: 19, w: 10}
       customData: 
       outline: []
       physicsShape: []
