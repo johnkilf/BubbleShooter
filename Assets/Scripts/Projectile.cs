@@ -123,6 +123,11 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (type == ProjectileType.BasicProjectile && collision.gameObject.CompareTag("Bubble"))
+        {
+            Debug.Log("Basic projectile collided with bubble");
+            Explode();
+        }
         if (explodeOnCollision && collision.gameObject.CompareTag("Bubble"))
         {
             Debug.Log("Projectile collided with bubble");
