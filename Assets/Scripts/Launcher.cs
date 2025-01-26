@@ -14,6 +14,8 @@ public class Launcher : MonoBehaviour
     [SerializeField] private float offset = 1f;
     [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
 
+    [SerializeField] private float minForce = 0.01f;
+
     public void Start()
     {
         GameInput.ActiveDelta += HandleActiveDelta;
@@ -38,7 +40,10 @@ public class Launcher : MonoBehaviour
         // Hide force indicator
         forceIndicator.gameObject.SetActive(false);
         // Launch ball
-        GetComponent<BubbleGun>().LaunchBubble(obj);
+        if (obj.magnitude > minForce)
+        {
+            GetComponent<BubbleGun>().LaunchBubble(obj);
+        }
     }
 
     private void HandleActiveDelta(Vector2 obj)
