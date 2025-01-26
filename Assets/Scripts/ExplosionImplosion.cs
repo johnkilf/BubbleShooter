@@ -47,6 +47,7 @@ public class ExplosionImplosion : MonoBehaviour
     public bool isDebugging = false;
     public float debugRadius = 1f;
     static readonly int MaxRadius = Shader.PropertyToID("_MaxRadius");
+    [SerializeField] private string bubbleSoundName;
 
     void DebugImpactWithMouse(InputAction.CallbackContext obj)
     {
@@ -64,6 +65,8 @@ public class ExplosionImplosion : MonoBehaviour
 
     public void StartAnimation(Vector2 positionWorld, float radius)
     {
+        
+        AudioManager.audioManagerRef.PlaySound(bubbleSoundName, 2f);
         StartCoroutine(ImpactAnimation(positionWorld, radius));
     }
 

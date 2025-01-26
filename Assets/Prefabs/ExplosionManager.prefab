@@ -72,3 +72,4 @@ MonoBehaviour:
   vfxPrefab: {fileID: 7241846695087203337, guid: dafaa8ffe3e4a5846a2fd6c39fd0391d, type: 3}
   isDebugging: 0
   debugRadius: 2
+  bubbleSoundName: bubble_explosion
