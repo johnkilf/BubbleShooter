@@ -26,6 +26,7 @@ public class LevelButtonScript : MonoBehaviour
 
     public void LoadLevel()
     {
+        AudioManager.audioManagerRef.PlaySound("click", 0.4f);
         if(levelManager != null && levelName != null)
             levelManager.PlayLevel(levelName);
     }

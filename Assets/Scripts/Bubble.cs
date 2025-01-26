@@ -39,6 +39,7 @@ public class Bubble : MonoBehaviour
             float impactStrength = collision.relativeVelocity.magnitude;
             Vector2 impactPoint = collision.GetContact(0).point;
             GetComponent<BubbleVFX>().StartImpactAnimation(impactPoint);
+            AudioManager.audioManagerRef.PlaySound("bubble_touching");
         }
     }
 

@@ -80,7 +80,7 @@ MonoBehaviour:
     loop: 0
     outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
     source: {fileID: 0}
-  - name: bubble_click
+  - name: click
     clip: {fileID: 8300000, guid: f283ca70acbb14b3199f5e26c4b4504a, type: 3}
     volume: 0.75
     pitch: 1

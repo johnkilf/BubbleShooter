@@ -23,6 +23,7 @@ public class ProjectileButton : MonoBehaviour, IPointerClickHandler
         Debug.Log(projectileType + " clicked");
         if (isActive)
         {
+            AudioManager.audioManagerRef.PlaySound("click", 0.4f);
             HudEvents.ProjectileClicked?.Invoke(projectileType);
         }
     }

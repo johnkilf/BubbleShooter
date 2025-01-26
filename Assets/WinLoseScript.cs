@@ -24,7 +24,7 @@ public class WinLoseScript : MonoBehaviour
         // Stop music
         AudioManager.audioManagerRef.StopSound("main_theme");
         // PLAY SOUND: win
-        AudioManager.audioManagerRef.PlaySound("win");
+        AudioManager.audioManagerRef.PlaySound("win", 0.4f);
     }
 
     public void Lose()
