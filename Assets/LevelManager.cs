@@ -2,11 +2,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
+using System;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
     public Transform levelsPanel;
     public LevelButtonScript levelButton;
+
+    private List<string> _levels = new System.Collections.Generic.List<string>();
 
     void Start()
     {
@@ -39,18 +43,60 @@ public class LevelManager : MonoBehaviour
                     if (levelsPanel == null)
                         Debug.LogWarning("Levels Panel prefab not set in the Level Manager!");
                 }
+                _levels.Add(sceneName);
             }
         }
-    }
-
-    public void PlayGame()
-    {
-        SceneManager.LoadSceneAsync("SampleScene");
     }
 
     public void PlayLevel(string levelName)
     {
         SceneManager.LoadSceneAsync(levelName);
+    }
+
+    public void PlayGame()
+    {
+        if (_levels.Count > 0)
+            PlayLevel(_levels[0]);
+        else
+            Debug.Log("There aren't any levels to play! Add Scenes with the word 'Level' in them to get them automatically added.");
+    }
+
+    public void PlayNextLevel()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        int sceneIndex = 0;
+
+        foreach(string s in _levels)
+        {
+            sceneIndex++;
+            if (s == currentScene)
+                break;
+        }
+
+        // If we beat the last level go to Main Menu
+        if (sceneIndex < _levels.Count)
+            PlayLevel(_levels[sceneIndex]);
+        else
+            QuitToMainMenu();
+
+    }
+
+    public void ReloadLevel()
+    {
+        PlayLevel(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitToMainMenu()
+    {
+        try
+        {
+            PlayLevel("MainMenu");
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Scene MainMenu doesn't exist or can't be loaded!");
+        }
     }
 
     public void QuitGame()

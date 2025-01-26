@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
+    public WinLoseScript winLoseScript;
+
     Rigidbody2D rb;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +24,7 @@ public class Bubble : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             Debug.Log("Bubble reached the finish line");
+            Escape();
         }
         if (collision.gameObject.CompareTag("Spikes"))
         {
@@ -38,7 +43,18 @@ public class Bubble : MonoBehaviour
     {
         Debug.Log("Bubble exploded");
         Destroy(gameObject);
-        // Restart the game 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+
+        if (winLoseScript != null)
+            winLoseScript.Lose();
+    }
+
+    public void Escape()
+    {
+        if (winLoseScript != null)
+            winLoseScript.Win();
+
+        Debug.Log("Bubble escaped!");
+        Destroy(gameObject);
+
     }
 }
