@@ -8,6 +8,9 @@ public class Launcher : MonoBehaviour
 
     [SerializeField] private float rotationLimit = 70f;
 
+    [SerializeField] private float offset = 1f;
+    [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
+
     public void Start()
     {
         GameInput.ActiveDelta += HandleActiveDelta;
@@ -20,11 +23,18 @@ public class Launcher : MonoBehaviour
         GameInput.ReleasedDelta -= HandleReleasedDelta;
     }
 
+    private float ScaleDragVector(Vector2 delta)
+    {
+        return Mathf.Clamp(delta.magnitude - offset, 0, distanceToDragForMaximumSpeed) / distanceToDragForMaximumSpeed;
+    }
+
     private void HandleReleasedDelta(Vector2 obj)
     {
-        // TODO Launch ball
         Debug.Log("Launch ball");
+        obj = obj.normalized * ScaleDragVector(obj);
+        // Hide force indicator
         forceIndicator.gameObject.SetActive(false);
+        // Launch ball
         GetComponent<BubbleGun>().LaunchBubble(obj);
     }
 
@@ -34,7 +44,9 @@ public class Launcher : MonoBehaviour
         var rotation = CalculateRotation(obj);
         forceIndicator.transform.rotation = Quaternion.Euler(0, 0, rotation);
 
-        var force = obj.magnitude;
+        var force = ScaleDragVector(obj);
+        Debug.Log("Indicator force: " + force);
+
         forceIndicatorVisual.transform.localScale = new Vector3(1, force, 1);
     }
 
