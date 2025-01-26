@@ -11,6 +11,9 @@ public class Launcher : MonoBehaviour
     private float _forceIndicatorHeadZeroOffset = 0.6f;
     private float _forceIndicatorHeadFullOffset = 1.5f;
 
+    [SerializeField] private float offset = 1f;
+    [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
+
     public void Start()
     {
         GameInput.ActiveDelta += HandleActiveDelta;
@@ -23,11 +26,18 @@ public class Launcher : MonoBehaviour
         GameInput.ReleasedDelta -= HandleReleasedDelta;
     }
 
+    private float ScaleDragVector(Vector2 delta)
+    {
+        return Mathf.Clamp(delta.magnitude - offset, 0, distanceToDragForMaximumSpeed) / distanceToDragForMaximumSpeed;
+    }
+
     private void HandleReleasedDelta(Vector2 obj)
     {
-        // TODO Launch ball
         Debug.Log("Launch ball");
+        obj = obj.normalized * ScaleDragVector(obj);
+        // Hide force indicator
         forceIndicator.gameObject.SetActive(false);
+        // Launch ball
         GetComponent<BubbleGun>().LaunchBubble(obj);
     }
 
@@ -37,13 +47,15 @@ public class Launcher : MonoBehaviour
         var rotation = CalculateRotation(obj);
         forceIndicator.transform.rotation = Quaternion.Euler(0, 0, rotation);
 
-        var force = obj.magnitude;
+        var force = ScaleDragVector(obj);
+        Debug.Log("Indicator force: " + force);
+        
         forceIndicatorBody.transform.localScale = new Vector3(1, force, 1);
 
         forceIndicatorHead.transform.localPosition = new Vector3(forceIndicatorHead.transform.localPosition.x,
             CalculateForceIndicatorOffset(force), forceIndicatorHead.transform.localPosition.x);
     }
-
+    
     private float CalculateForceIndicatorOffset(float force)
     {
         return _forceIndicatorHeadZeroOffset + force * (_forceIndicatorHeadFullOffset - _forceIndicatorHeadZeroOffset);

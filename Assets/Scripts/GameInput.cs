@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 public class GameInput : MonoBehaviour
 {
     [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
-    [SerializeField] private RectTransform disallowedArea; 
+
+    [SerializeField] private float offset = 0.5f;
+    [SerializeField] private RectTransform disallowedArea;
 
     private InputSystem_Actions _inputSystemActions;
 
@@ -45,23 +47,23 @@ public class GameInput : MonoBehaviour
 
         if (_isPressed)
         {
-            var delta = position - _start;
-            var portionOfFullDrag = ScaleDragVector(delta);
-            ActiveDelta?.Invoke(delta.normalized * portionOfFullDrag);
+            var delta = Camera.main.ScreenToWorldPoint(position) - Camera.main.ScreenToWorldPoint(_start);
+            Debug.Log("Original delta: " + delta);
+            ActiveDelta?.Invoke(delta);
         }
     }
 
     private void HandlePressStarted(InputAction.CallbackContext obj)
     {
         var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
-        
+
         if (IsWithinDisallowedArea(position))
         {
             Debug.Log("Disallowed click");
             return;
         }
 
-        _start = position; 
+        _start = position;
         _isPressed = true;
     }
 
@@ -71,12 +73,11 @@ public class GameInput : MonoBehaviour
         {
             return;
         }
-        
+
         var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
         Debug.Log("Press cancelled");
-        Vector2 dragVector = _start - position;
-        var portionOfFullDrag = ScaleDragVector(dragVector);
-        ReleasedDelta?.Invoke(dragVector.normalized * portionOfFullDrag);
+        Vector2 dragVector = Camera.main.ScreenToWorldPoint(_start) - Camera.main.ScreenToWorldPoint(position);
+        ReleasedDelta?.Invoke(dragVector);
         _isPressed = false;
     }
 
@@ -86,7 +87,7 @@ public class GameInput : MonoBehaviour
         ChangeProjectileType?.Invoke();
 
     }
-    
+
     private bool IsWithinDisallowedArea(Vector2 screenPosition)
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
