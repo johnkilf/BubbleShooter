@@ -11,7 +11,7 @@ public class BubbleGun : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    ProjectileType currentType = ProjectileType.Explosive;
+    ProjectileType currentType = ProjectileType.BasicProjectile;
 
     List<ProjectileType> availableTypes = new List<ProjectileType> { ProjectileType.Explosive, ProjectileType.Implosive, ProjectileType.BasicProjectile };
 
