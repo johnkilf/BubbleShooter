@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    if(levelButton == null)
+                    if (levelButton == null)
                         Debug.LogWarning("Level button prefab not set in the Level Manager!");
                     if (levelsPanel == null)
                         Debug.LogWarning("Levels Panel prefab not set in the Level Manager!");
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
 
         int sceneIndex = 0;
 
-        foreach(string s in _levels)
+        foreach (string s in _levels)
         {
             sceneIndex++;
             if (s == currentScene)

@@ -10,6 +10,8 @@ public class Launcher : MonoBehaviour
     public float maxDragDistance = 2f;
     public float deltaOffset = 2f;
 
+    public float deltaOffsetHorizontal = 1f;
+
     public float minDragDistance = 0.01f;
 
     public void Start()
@@ -52,7 +54,15 @@ public class Launcher : MonoBehaviour
     {
         Vector2 forceIndicatorPosition = new Vector2(forceIndicator.transform.position.x, forceIndicator.transform.position.y);
         Vector2 delta = forceIndicatorPosition - cursorPosition;
-        float newMagnitude = Mathf.Clamp(delta.magnitude - deltaOffset, 0, maxDragDistance) / maxDragDistance;
+        // Scale offset based on the direction of the delta between deltaOffset for vertical and deltaOffsetHorizontal for horizontal
+        float normalizedValue = Mathf.Abs(delta.normalized.y);
+        Debug.Log("Normalized value: " + normalizedValue);
+        float offset = Mathf.Lerp(deltaOffsetHorizontal, deltaOffset, normalizedValue);
+        Debug.Log("Offset: " + offset);
+        // float verticality = Mathf.Ta
+        // float offset = Mathf.
+        Debug.Log("Delta: " + delta);
+        float newMagnitude = Mathf.Clamp(delta.magnitude - offset, 0, maxDragDistance) / maxDragDistance;
         delta = delta.normalized * newMagnitude;
         return delta;
     }
