@@ -210,3 +210,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: 0
+  isActive: 1
+  projectileSprite: {fileID: 8418390138786355750}
