@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4899662446503783128, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
+      propertyPath: m_text
+      value: Tap anywhere and drag down!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
