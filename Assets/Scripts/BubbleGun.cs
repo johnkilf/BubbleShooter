@@ -96,6 +96,8 @@ public class BubbleGun : MonoBehaviour
 
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.AddForce(direction * force, ForceMode2D.Impulse);
+        
+        AudioManager.audioManagerRef.PlaySound("shoot");
     }
 
     private void ChangeGunType()

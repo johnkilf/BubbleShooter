@@ -6,6 +6,6 @@ public class MusicScript : MonoBehaviour
     void Start()
     {
         // PLAY SOUND: main theme
-        AudioManager.audioManagerRef.PlaySound("main_theme");
+        AudioManager.audioManagerRef.PlaySound("main_theme", 0.4f);
     }
 }
