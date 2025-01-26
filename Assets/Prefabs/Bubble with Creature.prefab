@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d30469a3025b3a4e96fe126cd0256aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSpriteRenderer: {fileID: 6538332165665146828}
+  creatureSpriteRenderer: {fileID: 1915295434291061888}
+  winLoseScript: {fileID: 0}
 --- !u!50 &2189110032564960750
 Rigidbody2D:
   serializedVersion: 5

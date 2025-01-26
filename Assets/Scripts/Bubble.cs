@@ -1,8 +1,12 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class Bubble : MonoBehaviour
 {
+
+    [SerializeField] SpriteRenderer bubbleSpriteRenderer;
+    [SerializeField] SpriteRenderer creatureSpriteRenderer;
     public WinLoseScript winLoseScript;
 
     Rigidbody2D rb;
@@ -57,10 +61,22 @@ public class Bubble : MonoBehaviour
         OnBubbleExploded?.Invoke(transform.position);
 
         Debug.Log("Bubble exploded");
-        Destroy(gameObject);
+        bubbleSpriteRenderer.enabled = false;
+        creatureSpriteRenderer.enabled = false;
 
         if (winLoseScript != null)
-            winLoseScript.Lose();
+        {
+            // winLoseScript.Lose();
+            StartCoroutine(DelayLoseMenu());
+        }
+    }
+
+    IEnumerator DelayLoseMenu()
+    {
+        Debug.Log("Waiting for 2 seconds");
+        yield return new WaitForSeconds(2f);
+        winLoseScript.Lose();
+        Destroy(gameObject);
     }
 
     public void Escape()

@@ -28,7 +28,7 @@ public class ExplosionImplosion : MonoBehaviour
 
     bool impactAnimationIsRunning;
     Coroutine impactAnimationCoroutine;
-    
+
     static readonly int ImpactMaster = Shader.PropertyToID("_ImpactMaster");
     static readonly int RandomSeed = Shader.PropertyToID("_RandomSeed");
 
@@ -41,7 +41,7 @@ public class ExplosionImplosion : MonoBehaviour
 
 
         //      float randomSeed = UnityEngine.Random.value;
-//        material.SetFloat(RandomSeed, randomSeed);
+        //        material.SetFloat(RandomSeed, randomSeed);
     }
 
     public bool isDebugging = false;
@@ -65,7 +65,7 @@ public class ExplosionImplosion : MonoBehaviour
 
     public void StartAnimation(Vector2 positionWorld, float radius)
     {
-        
+
         AudioManager.audioManagerRef.PlaySound(bubbleSoundName, 2f);
         StartCoroutine(ImpactAnimation(positionWorld, radius));
     }
@@ -78,7 +78,7 @@ public class ExplosionImplosion : MonoBehaviour
         GameObject newVfx = Instantiate(vfxPrefab, position, Quaternion.identity);
 
         Renderer render = newVfx.GetComponent<Renderer>();
-        
+
         material = Instantiate(render.material);
         render.material = material;
 
@@ -87,7 +87,7 @@ public class ExplosionImplosion : MonoBehaviour
             render.material.SetFloat(MaxRadius, radius);
         }
 
-        
+
         float time = 0;
 
         while (time < animationDuration)
@@ -98,8 +98,6 @@ public class ExplosionImplosion : MonoBehaviour
             float curveAdjustedT = Mathf.Clamp01(animationCurve.Evaluate(t));
 
             render.material.SetFloat(Progress, curveAdjustedT);
-            Debug.Log(curveAdjustedT);
-
             yield return null;
         }
 
