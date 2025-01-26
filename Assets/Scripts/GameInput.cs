@@ -11,7 +11,6 @@ public class GameInput : MonoBehaviour
 
     private bool _isPressed;
     private Vector2 _start;
-    private Vector2 _currentPos;
 
     public static Action<Vector2> ActiveDelta;
     public static Action<Vector2> ReleasedDelta;
@@ -42,11 +41,11 @@ public class GameInput : MonoBehaviour
 
     private void HandlePos(InputAction.CallbackContext obj)
     {
-        _currentPos = obj.ReadValue<Vector2>();
+        var position = obj.ReadValue<Vector2>();
 
         if (_isPressed)
         {
-            var delta = _currentPos - _start;
+            var delta = position - _start;
             var portionOfFullDrag = ScaleDragVector(delta);
             ActiveDelta?.Invoke(delta.normalized * portionOfFullDrag);
         }
@@ -54,13 +53,15 @@ public class GameInput : MonoBehaviour
 
     private void HandlePressStarted(InputAction.CallbackContext obj)
     {
-        if (IsWithinDisallowedArea(_currentPos))
+        var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
+        
+        if (IsWithinDisallowedArea(position))
         {
             Debug.Log("Disallowed click");
             return;
         }
-        
-        _start = _currentPos;
+
+        _start = position; 
         _isPressed = true;
     }
 
@@ -71,8 +72,9 @@ public class GameInput : MonoBehaviour
             return;
         }
         
+        var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
         Debug.Log("Press cancelled");
-        Vector2 dragVector = _start - _currentPos;
+        Vector2 dragVector = _start - position;
         var portionOfFullDrag = ScaleDragVector(dragVector);
         ReleasedDelta?.Invoke(dragVector.normalized * portionOfFullDrag);
         _isPressed = false;
@@ -90,7 +92,7 @@ public class GameInput : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             disallowedArea,
             screenPosition,
-            null, // You can specify a camera if required
+            null,
             out Vector2 localPoint
         );
 
