@@ -59,6 +59,10 @@ public class Projectile : MonoBehaviour
             // }
             explosionManager = GameObject.Find("ImplosionManager").GetComponent<ExplosionImplosion>();
         }
+        else if (type == ProjectileType.BasicProjectile)
+        {
+            explosionManager = GameObject.Find("BaseProjectilePopManager").GetComponent<ExplosionImplosion>();
+        }
     }
 
     // Update is called once per frame
@@ -95,6 +99,10 @@ public class Projectile : MonoBehaviour
         if (type == ProjectileType.Implosive || type == ProjectileType.Explosive)
         {
             explosionManager?.StartAnimation(transform.position, maxEffectDistance * 0.7f);
+        }
+        if (type == ProjectileType.BasicProjectile)
+        {
+            explosionManager?.StartAnimation(transform.position, 1f);
         }
 
         Destroy(gameObject);
