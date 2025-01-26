@@ -68,7 +68,7 @@ public class ExplosionImplosion : MonoBehaviour
     }
 
 
-    IEnumerator ImpactAnimation(Vector2 position, float radius)
+    IEnumerator ImpactAnimation(Vector2 position, float radius = 0f)
     {
         impactAnimationIsRunning = true;
 
@@ -78,8 +78,11 @@ public class ExplosionImplosion : MonoBehaviour
         
         material = Instantiate(render.material);
         render.material = material;
-        
-        render.material.SetFloat(MaxRadius, radius);
+
+        if (radius > 0f)
+        {
+            render.material.SetFloat(MaxRadius, radius);
+        }
 
         
         float time = 0;
