@@ -70,5 +70,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationDuration: 1.5
   vfxPrefab: {fileID: 9130158312690650884, guid: 78950627269f6bd45a8bc11cf122316c, type: 3}
-  isDebugging: 1
+  isDebugging: 0
   debugRadius: 2

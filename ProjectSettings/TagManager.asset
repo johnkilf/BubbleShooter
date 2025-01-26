@@ -7,6 +7,8 @@ TagManager:
   - Bubble
   - Spikes
   - Projectile
+  - ExplosionManager
+  - ImplosionManager
   layers:
   - Default
   - TransparentFX

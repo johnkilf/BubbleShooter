@@ -25,6 +25,8 @@ public class Projectile : MonoBehaviour
     public DistanceEffect distanceEffect = DistanceEffect.Quadratic;
     public bool explodeOnCollision = false;
 
+    public ExplosionImplosion explosionManager;
+
 
     int collisionCount = 0;
     float creationTime;
@@ -33,6 +35,30 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         creationTime = Time.time;
+        if (type == ProjectileType.Explosive)
+        {
+            // // If Explosion Manager is not found, instantiate it from the prefab
+            // if (GameObject.Find("ExplosionManager") == null)
+            // {
+            //     GameObject explosionManagerPrefab = Resources.Load<GameObject>("Prefabs/ExplosionManager");
+            //     if (explosionManagerPrefab != null)
+            //     {
+            //         GameObject explosionManager = Instantiate(explosionManagerPrefab);
+            //         explosionManager.name = "ExplosionManager";
+            //     }
+            // }
+            explosionManager = GameObject.Find("ExplosionManager").GetComponent<ExplosionImplosion>();
+        }
+        else if (type == ProjectileType.Implosive)
+        {
+            // // If Implosion Manager is not found, instantiate it from the prefab
+            // if (GameObject.Find("ImplosionManager") == null)
+            // {
+            //     GameObject implosionManager = Instantiate(Resources.Load("ImplosionManager")) as GameObject;
+            //     implosionManager.name = "ImplosionManager";
+            // }
+            explosionManager = GameObject.Find("ImplosionManager").GetComponent<ExplosionImplosion>();
+        }
     }
 
     // Update is called once per frame
@@ -64,6 +90,11 @@ public class Projectile : MonoBehaviour
         foreach (Rigidbody2D rb in rbs)
         {
             ApplyMovement(rb);
+        }
+
+        if (type == ProjectileType.Implosive || type == ProjectileType.Explosive)
+        {
+            explosionManager?.StartAnimation(transform.position, maxEffectDistance * 0.7f);
         }
 
         Destroy(gameObject);
