@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -37,9 +38,10 @@ public class BubbleGun : MonoBehaviour
         HudEvents.ProjectileClicked += SetGunType;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
+        GameInput.ChangeProjectileType -= ChangeGunType;
+        HudEvents.ProjectileClicked -= SetGunType;
     }
 
     public void LaunchBubble(Vector2 velocity)
