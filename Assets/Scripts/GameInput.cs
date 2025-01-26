@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
-    [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
-
-    [SerializeField] private float offset = 0.5f;
     [SerializeField] private RectTransform disallowedArea;
 
     private InputSystem_Actions _inputSystemActions;
@@ -36,9 +33,17 @@ public class GameInput : MonoBehaviour
         _inputSystemActions.Dispose();
     }
 
-    private float ScaleDragVector(Vector2 delta)
+    private Vector2 NormalizedDelta(Vector2 position1, Vector2 position2)
     {
-        return Mathf.Min(delta.magnitude / distanceToDragForMaximumSpeed, distanceToDragForMaximumSpeed) / distanceToDragForMaximumSpeed;
+        // Normalize screen positions to [0, 1]
+        Vector2 normalizedPosition1 = new Vector2(position1.x / Screen.width, position1.y / Screen.height);
+        Vector2 normalizedPosition2 = new Vector2(position2.x / Screen.width, position2.y / Screen.height);
+        Debug.Log("Normalized position 1: " + normalizedPosition1);
+        Debug.Log("Normalized position 2: " + normalizedPosition2);
+
+        // Calculate delta
+        Vector2 delta = normalizedPosition1 - normalizedPosition2;
+        return delta;
     }
 
     private void HandlePos(InputAction.CallbackContext obj)
@@ -47,7 +52,8 @@ public class GameInput : MonoBehaviour
 
         if (_isPressed)
         {
-            var delta = Camera.main.ScreenToWorldPoint(position) - Camera.main.ScreenToWorldPoint(_start);
+            // var delta = Camera.main.ScreenToWorldPoint(position) - Camera.main.ScreenToWorldPoint(_start);
+            var delta = NormalizedDelta(position, _start);
             Debug.Log("Original delta: " + delta);
             ActiveDelta?.Invoke(delta);
         }
@@ -76,7 +82,8 @@ public class GameInput : MonoBehaviour
 
         var position = _inputSystemActions.Player.Position.ReadValue<Vector2>();
         Debug.Log("Press cancelled");
-        Vector2 dragVector = Camera.main.ScreenToWorldPoint(_start) - Camera.main.ScreenToWorldPoint(position);
+        // Vector2 dragVector = Camera.main.ScreenToWorldPoint(_start) - Camera.main.ScreenToWorldPoint(position);
+        Vector2 dragVector = NormalizedDelta(_start, position);
         ReleasedDelta?.Invoke(dragVector);
         _isPressed = false;
     }
