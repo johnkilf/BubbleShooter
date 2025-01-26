@@ -15,9 +15,17 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        var levelScenes = GetLevelScenes();
+        _levels = levelScenes.Select(x => x.name).ToList();
+
+        PopulateLevelSelectPanel(levelScenes);
+    }
+
+    private void PopulateLevelSelectPanel(List<(string name, int number)> levelScenes)
+    {
         if (levelsPanel == null)
         {
-            Debug.LogError("Levels Panel is not assigned in the Level Manager!");
+            Debug.LogWarning("Levels Panel is not assigned in the Level Manager!");
             return;
         }
 
@@ -35,10 +43,26 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("No GridLayoutGroup found on LevelsPanel!");
         }
 
-        PopulateLevels();
+        // Create buttons
+        if (levelButton != null && levelsPanel != null)
+        {
+            foreach (var level in levelScenes)
+            {
+                LevelButtonScript newLevelButton = Instantiate(levelButton, levelsPanel, false);
+                newLevelButton.SetLevel(level.name);
+                newLevelButton.levelManager = this;
+            }
+        }
+        else
+        {
+            if (levelButton == null)
+                Debug.LogWarning("Level button prefab not set in the Level Manager!");
+            if (levelsPanel == null)
+                Debug.LogWarning("Levels Panel prefab not set in the Level Manager!");
+        }
     }
 
-    private void PopulateLevels()
+    private List<(string name, int number)> GetLevelScenes()
     {
         var levelScenes = new List<(string name, int number)>();
 
@@ -58,26 +82,8 @@ public class LevelManager : MonoBehaviour
 
         // Sort by level number
         levelScenes = levelScenes.OrderBy(x => x.number).ToList();
-        _levels = levelScenes.Select(x => x.name).ToList();
-
-        // Create buttons
-        if (levelButton != null && levelsPanel != null)
-        {
-            foreach (var level in levelScenes)
-            {
-                LevelButtonScript newLevelButton = Instantiate(levelButton);
-                newLevelButton.transform.SetParent(levelsPanel, false);
-                newLevelButton.SetLevel(level.name);
-                newLevelButton.levelManager = this;
-            }
-        }
-        else
-        {
-            if (levelButton == null)
-                Debug.LogWarning("Level button prefab not set in the Level Manager!");
-            if (levelsPanel == null)
-                Debug.LogWarning("Levels Panel prefab not set in the Level Manager!");
-        }
+        
+        return levelScenes;
     }
 
     public void PlayLevel(string levelName)

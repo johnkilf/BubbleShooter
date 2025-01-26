@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2137093445547560531, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
+      propertyPath: levelsPanel
+      value: 
+      objectReference: {fileID: 2062315037}
     - target: {fileID: 3482189964568182465, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
       propertyPath: m_Name
       value: LevelManagers
@@ -1081,6 +1085,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b56d34497fed0b4493ee2cac400ff24, type: 3}
+--- !u!224 &2062315037 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1243578198318459067, guid: c4eaea508a8fc494dbe6b413a18bd4e3, type: 3}
+  m_PrefabInstance: {fileID: 306154785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2119841010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,11 +1183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 546320903057606410, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_Size.x
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2420171918674005304, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_Size.x
-      value: 8.124487
+      value: 7.234201
       objectReference: {fileID: 0}
     - target: {fileID: 2420171918674005304, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_Offset.x
@@ -1190,11 +1199,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2420171918674005304, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2986180204920301811, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.66
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 2986180204920301811, guid: cc1c188dbdd4044c195a9bd59e69a34e, type: 3}
       propertyPath: m_LocalPosition.y
