@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Implosion
+  m_Shader: {fileID: 4800000, guid: 1d15ae568b6d1104eaa095f639ec558d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 834016c2068ac734a9d2fcc811cfbe33, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex:
+        m_Texture: {fileID: 2800000, guid: 93866e074d5e20a43bcf81162ee19863, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex1:
+        m_Texture: {fileID: 2800000, guid: 7e20dfc2836205141b79add702502568, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex2:
+        m_Texture: {fileID: 2800000, guid: 7a088a7f462ad4e419760d97527259e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _AlphaFadePower: 0.5
+    - _CenterColorFadeEnd: 0.372
+    - _CenterColorFadeStart: 0.064
+    - _CurrentRadius: 0.6
+    - _Float0: 1
+    - _Float1: 1
+    - _ImpactDeformRadius: 0
+    - _ImpactMaster: 0
+    - _ImpactPushedAwayStrength: 0
+    - _MaxRadius: 1.43
+    - _MidColorFadeEnd: 1
+    - _MidColorFadeStart: 0.494
+    - _Progress: 0.459
+    - _RandomSeed: 0
+    - _RingValueEnd: 1
+    - _RingValueMid: 0.447
+    - _RingValueStart: 0
+    - _StartAlphaFade: 0.738
+    - _TexRadialSpeed: 0.58
+    - _UseTexture: 0
+    - _ValueMulitPower: 1
+    - _ValueMultiEndFactor: 1.23
+    - _ValueMultiEndPosition: 1
+    - _ValueMultiStartFactor: 0.29
+    - _ValueMultiStartPosition: 0
+    - _WobbleScale: 5
+    - _WobbleSpeed: 0.08485421
+    - _WobbleStrength: 0.9227096
+    m_Colors:
+    - _CenterColor: {r: 0.014417935, g: 0.057237014, b: 0.33962262, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ImpactPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _MidColor: {r: 0, g: 1.1221095, b: 4.6792445, a: 0.0627451}
+    - _OuterColor: {r: 0, g: 0.307904, b: 7.698112, a: 0.972549}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
