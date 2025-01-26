@@ -862,20 +862,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
-      propertyPath: offset
-      value: 0.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
       propertyPath: deltaOffset
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
       propertyPath: maxDragDistance
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
-      propertyPath: distanceToDragForMaximumSpeed
-      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2655093963207173565, guid: d4fcfb586b1abd94996930542757885e, type: 3}
       propertyPath: m_LocalPosition.x
