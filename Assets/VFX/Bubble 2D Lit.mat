@@ -59,11 +59,11 @@ Material:
     - _ImpactScaleStrength1: 0.67
     - _MidColorFadeEnd: 1
     - _MidColorFadeStart: 0.919
-    - _PopMaxStrengthTime: 0
-    - _PopMaxStrengthValue: 0
+    - _PopMaxStrengthTime: 0.25
+    - _PopMaxStrengthValue: 0.576
     - _PopProgress: 0
-    - _PopScaleStrength: 0
-    - _PopStartFadeTime: 0
+    - _PopScaleStrength: 1.157
+    - _PopStartFadeTime: 0.692
     - _PopStartScale: 0
     - _Progress: 0
     - _RandomSeed: 0
