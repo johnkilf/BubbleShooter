@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SoundTestScript : MonoBehaviour
 {
+    public int soundIndex = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,6 +13,14 @@ public class SoundTestScript : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonUp(0))
-            AudioManager.audioManagerRef.PlaySound("bubble burst");
+        {
+            if(soundIndex < AudioManager.audioManagerRef.sounds.Length)
+            {
+                AudioManager.audioManagerRef.PlaySound(AudioManager.audioManagerRef.sounds[soundIndex].name);
+                soundIndex++;
+            }
+            //AudioManager.audioManagerRef.PlaySound("bubble burst");
+
+        }
     }
 }

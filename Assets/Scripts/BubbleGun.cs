@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -11,12 +12,9 @@ public class BubbleGun : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    ProjectileType currentType = ProjectileType.Explosive;
+    ProjectileType currentType = ProjectileType.BasicProjectile;
 
     List<ProjectileType> availableTypes = new List<ProjectileType> { ProjectileType.Explosive, ProjectileType.Implosive, ProjectileType.BasicProjectile };
-
-    private float chargeStartTime = 0f;
-    private bool isCharging = false;
 
     // min force per projectile type
     public float minForceExplosive = 10f;
@@ -28,18 +26,22 @@ public class BubbleGun : MonoBehaviour
     public float maxForceImplosive = 40f;
     public float maxForceBasicProjectile = 40f;
 
-    public float maxChargeTime = 2f;
+    public Color explosiveColor = Color.red;
+    public Color implosiveColor = Color.blue;
+    public Color basicProjectileColor = Color.green;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetGunType(currentType);
-        GameInput.Instance.ChangeProjectileType += ChangeGunType;
+        GameInput.ChangeProjectileType += ChangeGunType;
+        HudEvents.ProjectileClicked += SetGunType;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
+        GameInput.ChangeProjectileType -= ChangeGunType;
+        HudEvents.ProjectileClicked -= SetGunType;
     }
 
     public void LaunchBubble(Vector2 velocity)
@@ -110,17 +112,17 @@ public class BubbleGun : MonoBehaviour
         if (currentType == ProjectileType.Explosive)
         {
             // Set sprite to explosive 
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = explosiveColor;
         }
         else if (currentType == ProjectileType.BasicProjectile)
         {
             // Set sprite to basic
-            spriteRenderer.color = Color.green;
+            spriteRenderer.color = basicProjectileColor;
         }
         else if (currentType == ProjectileType.Implosive)
         {
             // Set sprite to implosive
-            spriteRenderer.color = Color.blue;
+            spriteRenderer.color = implosiveColor;
         }
         else
         {

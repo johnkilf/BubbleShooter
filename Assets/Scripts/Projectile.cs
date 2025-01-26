@@ -26,14 +26,12 @@ public class Projectile : MonoBehaviour
     public bool explodeOnCollision = false;
 
 
-    Bubble bubble;
     int collisionCount = 0;
     float creationTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bubble = GameObject.Find("Bubble").GetComponent<Bubble>();
         creationTime = Time.time;
     }
 
@@ -62,7 +60,7 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("Projectile exploded");
         // Find all Rigidbody2D objects in the scene and apply movement to them
-        Rigidbody2D[] rbs = FindObjectsOfType<Rigidbody2D>();
+        Rigidbody2D[] rbs = FindObjectsByType<Rigidbody2D>(FindObjectsSortMode.None);
         foreach (Rigidbody2D rb in rbs)
         {
             ApplyMovement(rb);
@@ -94,11 +92,6 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Debug.Log("Bubble collided with spikes");
-            Explode();
-        }
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            Debug.Log("Projectile collided with projectile");
             Explode();
         }
         collisionCount++;

@@ -45,8 +45,85 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: bubble burst
+  - name: bubble_burst
     clip: {fileID: 8300000, guid: a4d85d61b97c744abaa3fa03f957f40b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: bubble_explosion
+    clip: {fileID: 8300000, guid: 566eb1023ca684946836c10b6909053c, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: bubble_implosion
+    clip: {fileID: 8300000, guid: a6a154a7c564a4778860c0c63023a81c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: bubble_switching
+    clip: {fileID: 8300000, guid: 4bdab3a2fd6bd417d8d0194403f68efc, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: bubble_touching
+    clip: {fileID: 8300000, guid: e26286be8a8db40f1823bf3403468e3b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: bubble_click
+    clip: {fileID: 8300000, guid: f283ca70acbb14b3199f5e26c4b4504a, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: release
+    clip: {fileID: 8300000, guid: 828d47d31303e42008abc133807aca32, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: main_theme
+    clip: {fileID: 8300000, guid: ddbd8348cb00f4f99a7141f83caf0948, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 1
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: shoot
+    clip: {fileID: 8300000, guid: a372db29e580848e6abaf0927ebe7d44, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: drag
+    clip: {fileID: 8300000, guid: 9181f8ff5999740f5a0c54b7bbd65746, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: win
+    clip: {fileID: 8300000, guid: 9e8466f7296584742aec59802e62facd, type: 3}
+    volume: 0.35
+    pitch: 1
+    loop: 0
+    outputAudioMixerGroup: {fileID: 24300002, guid: 061a88e181c584641864b02b4329c23f, type: 2}
+    source: {fileID: 0}
+  - name: lose
+    clip: {fileID: 8300000, guid: 761f7175684214609a6ac541649bd85d, type: 3}
     volume: 1
     pitch: 1
     loop: 0
