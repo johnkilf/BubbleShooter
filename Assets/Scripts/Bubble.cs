@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
@@ -6,6 +7,8 @@ public class Bubble : MonoBehaviour
 
     Rigidbody2D rb;
 
+
+    public static event Action<Vector2> OnBubbleExploded = delegate { };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,6 +44,8 @@ public class Bubble : MonoBehaviour
 
     public void Explode()
     {
+        OnBubbleExploded?.Invoke(transform.position);
+        
         Debug.Log("Bubble exploded");
         Destroy(gameObject);
 
