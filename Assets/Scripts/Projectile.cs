@@ -26,14 +26,12 @@ public class Projectile : MonoBehaviour
     public bool explodeOnCollision = false;
 
 
-    Bubble bubble;
     int collisionCount = 0;
     float creationTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bubble = GameObject.Find("Bubble").GetComponent<Bubble>();
         creationTime = Time.time;
     }
 
