@@ -59,11 +59,18 @@ Material:
     - _ImpactScaleStrength1: 0.67
     - _MidColorFadeEnd: 1
     - _MidColorFadeStart: 0.919
+    - _PopMaxStrengthTime: 0
+    - _PopMaxStrengthValue: 0
+    - _PopProgress: 0
+    - _PopScaleStrength: 0
+    - _PopStartFadeTime: 0
+    - _PopStartScale: 0
+    - _Progress: 0
     - _RandomSeed: 0
     - _UseTexture: 0
     - _WobbleScale: 0.57
     - _WobbleSpeed: 0.69
-    - _WobbleStrength: 0.102
+    - _WobbleStrength: 0.118
     m_Colors:
     - _CenterColor: {r: 0.30526572, g: 0.99183166, b: 1.9611009, a: 0.14117648}
     - _Color0: {r: 0.39064258, g: 0.383277, b: 0.9339623, a: 1}
