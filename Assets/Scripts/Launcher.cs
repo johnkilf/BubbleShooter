@@ -1,12 +1,15 @@
-using System;
 using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
     [SerializeField] private GameObject forceIndicator;
-    [SerializeField] private GameObject forceIndicatorVisual;
+    [SerializeField] private GameObject forceIndicatorBody;
+    [SerializeField] private GameObject forceIndicatorHead;
 
     [SerializeField] private float rotationLimit = 70f;
+    
+    private float _forceIndicatorHeadZeroOffset = 0.6f;
+    private float _forceIndicatorHeadFullOffset = 1.5f;
 
     public void Start()
     {
@@ -35,7 +38,15 @@ public class Launcher : MonoBehaviour
         forceIndicator.transform.rotation = Quaternion.Euler(0, 0, rotation);
 
         var force = obj.magnitude;
-        forceIndicatorVisual.transform.localScale = new Vector3(1, force, 1);
+        forceIndicatorBody.transform.localScale = new Vector3(1, force, 1);
+
+        forceIndicatorHead.transform.localPosition = new Vector3(forceIndicatorHead.transform.localPosition.x,
+            CalculateForceIndicatorOffset(force), forceIndicatorHead.transform.localPosition.x);
+    }
+
+    private float CalculateForceIndicatorOffset(float force)
+    {
+        return _forceIndicatorHeadZeroOffset + force * (_forceIndicatorHeadFullOffset - _forceIndicatorHeadZeroOffset);
     }
 
     private float CalculateRotation(Vector2 obj)

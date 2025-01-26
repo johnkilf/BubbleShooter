@@ -1,16 +1,15 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public Transform levelsPanel;
     public LevelButtonScript levelButton;
 
-    private List<string> _levels = new System.Collections.Generic.List<string>();
+    private List<string> _levels = new();
 
     void Start()
     {
