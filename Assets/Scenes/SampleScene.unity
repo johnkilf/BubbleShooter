@@ -726,6 +726,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
+      propertyPath: deltaOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547610958082784829, guid: d4fcfb586b1abd94996930542757885e, type: 3}
+      propertyPath: maxDragDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2655093963207173565, guid: d4fcfb586b1abd94996930542757885e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

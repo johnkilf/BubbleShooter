@@ -3,19 +3,29 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
+
 {
     [SerializeField] private float distanceToDragForMaximumSpeed = 8f;
-    [SerializeField] private RectTransform disallowedArea; 
+    [SerializeField] private RectTransform disallowedArea;
 
     private InputSystem_Actions _inputSystemActions;
 
     private bool _isPressed;
     private Vector2 _start;
+    private float _startTimestamp;
     private Vector2 _currentPos;
 
     public static Action<Vector2> ActiveDelta;
     public static Action<Vector2> ReleasedDelta;
+
+    public static Action CancelledDelta;
+
     public static Action ChangeProjectileType;
+
+    public float minPressDuration = 0.1f;
+
+    private Vector2 launcherPosition;
+
     protected void Awake()
     {
         _inputSystemActions = new InputSystem_Actions();
@@ -35,33 +45,23 @@ public class GameInput : MonoBehaviour
         _inputSystemActions.Dispose();
     }
 
-    private float ScaleDragVector(Vector2 delta)
-    {
-        return Mathf.Min(delta.magnitude / distanceToDragForMaximumSpeed, distanceToDragForMaximumSpeed) / distanceToDragForMaximumSpeed;
-    }
-
     private void HandlePos(InputAction.CallbackContext obj)
     {
         _currentPos = obj.ReadValue<Vector2>();
 
         if (_isPressed)
         {
-            var delta = _currentPos - _start;
-            var portionOfFullDrag = ScaleDragVector(delta);
-            ActiveDelta?.Invoke(delta.normalized * portionOfFullDrag);
+            Vector2 cursorWorldPosition = Camera.main.ScreenToWorldPoint(_currentPos);
+            ActiveDelta?.Invoke(cursorWorldPosition);
         }
     }
 
     private void HandlePressStarted(InputAction.CallbackContext obj)
     {
-        if (IsWithinDisallowedArea(_currentPos))
-        {
-            Debug.Log("Disallowed click");
-            return;
-        }
-        
-        _start = _currentPos;
         _isPressed = true;
+        _start = _currentPos;
+        _startTimestamp = Time.time;
+        ActiveDelta?.Invoke(Camera.main.ScreenToWorldPoint(_start));
     }
 
     private void HandlePressCanceled(InputAction.CallbackContext obj)
@@ -70,11 +70,18 @@ public class GameInput : MonoBehaviour
         {
             return;
         }
-        
+
         Debug.Log("Press cancelled");
-        Vector2 dragVector = _start - _currentPos;
-        var portionOfFullDrag = ScaleDragVector(dragVector);
-        ReleasedDelta?.Invoke(dragVector.normalized * portionOfFullDrag);
+        if (Time.time - _startTimestamp > minPressDuration)
+        {
+            Vector2 cursorWorldPosition = Camera.main.ScreenToWorldPoint(_currentPos);
+            ReleasedDelta?.Invoke(cursorWorldPosition);
+        }
+        else
+        {
+            CancelledDelta?.Invoke();
+        }
+
         _isPressed = false;
     }
 
@@ -84,17 +91,6 @@ public class GameInput : MonoBehaviour
         ChangeProjectileType?.Invoke();
 
     }
-    
-    private bool IsWithinDisallowedArea(Vector2 screenPosition)
-    {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            disallowedArea,
-            screenPosition,
-            null, // You can specify a camera if required
-            out Vector2 localPoint
-        );
 
-        return disallowedArea.rect.Contains(localPoint);
-    }
 
 }
